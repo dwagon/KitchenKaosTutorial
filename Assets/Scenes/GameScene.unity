@@ -855,8 +855,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_NoiseProfile: {fileID: 11400000, guid: 46965f9cbaf525742a6da4c2172a99cd, type: 2}
   m_PivotOffset: {x: 0, y: 0, z: 0}
-  m_AmplitudeGain: 0.5
-  m_FrequencyGain: 0.5
+  m_AmplitudeGain: 0.25
+  m_FrequencyGain: 0.25
   mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &1766748198
 GameObject:
@@ -987,6 +987,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 195250692992057650, guid: 485c21754afe14f0c8229cd643821305,
+        type: 3}
+      propertyPath: kitchenObjectSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 1c03061ad41f644f79892ad9e92283ca,
+        type: 2}
     - target: {fileID: 4218214814679433419, guid: 485c21754afe14f0c8229cd643821305,
         type: 3}
       propertyPath: m_Name

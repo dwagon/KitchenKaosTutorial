@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
 		}
 		Instance = this;
 	}
+
 	private void Start()
 	{
 		gameInput.OnInteractAction += GameInput_OnInteractAction;
@@ -58,7 +59,6 @@ public class Player : MonoBehaviour
 		}
 		if (Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactDistance, countersLayerMask)) {
 			if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter)) {
-				clearCounter.Interact();
 				if (clearCounter != selectedCounter) {
 					SetSelectedCounter(clearCounter);
 				}
