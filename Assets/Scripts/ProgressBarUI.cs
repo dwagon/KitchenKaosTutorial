@@ -20,7 +20,7 @@ public class ProgressBarUI : MonoBehaviour
 	private void CuttingCounter_OnProgressChanged(object sender, CuttingCounter.OnProgressChangedEventArgs e)
 	{
 		barImage.fillAmount = e.progressNormalized;
-		if(e.progressNormalized == 0.0f || e.progressNormalized >= 0.95f) {
+		if(e.progressNormalized == 0.0f || e.progressNormalized == 1f) {
 			Hide();
 		}
 		else {

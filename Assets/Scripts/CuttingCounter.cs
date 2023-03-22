@@ -50,8 +50,8 @@ public class CuttingCounter : BaseCounter
 				progressNormalized = (float)cuttingProgress / cuttingRecipeSO.cuttingProgressMax
 			});
 
-			KitchenObjectSO outputKitchObjectSO = GetOutputForInput(GetKitchenObject().GetKitchenObjectSO());
-			if (cuttingProgress > cuttingRecipeSO.cuttingProgressMax) {
+			if (cuttingProgress >= cuttingRecipeSO.cuttingProgressMax) {
+				KitchenObjectSO outputKitchObjectSO = GetOutputForInput(GetKitchenObject().GetKitchenObjectSO());
 
 				GetKitchenObject().DestroySelf();
 				KitchenObject.SpawnKitchenObject(outputKitchObjectSO, this);
