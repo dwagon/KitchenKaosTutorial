@@ -71,11 +71,13 @@ public class DeliveryManager : MonoBehaviour
 					successfulRecipesAmount++;
 					waitingRecipeSOList.RemoveAt(i);
 					OnRecipeCompleted?.Invoke(this, EventArgs.Empty);
+					OnRecipeSuccess?.Invoke(this, EventArgs.Empty);
 					return;
 				}
 			}
 		}
-		// Plater did not deliver a correct recipe
+		// Player did not deliver a correct recipe
+		OnRecipeFailed?.Invoke(this, EventArgs.Empty);
 	}
 
 	public List<RecipeSO> GetWaitingRecipeSOList() {
