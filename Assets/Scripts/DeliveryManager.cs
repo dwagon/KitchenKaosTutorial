@@ -1,9 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DeliveryManager : MonoBehaviour
 {
+
+	public event EventHandler OnRecipeSpawned;
+	public event EventHandler OnRecipeCompleted;
+	public event EventHandler OnRecipeSuccess;
+	public event EventHandler OnRecipeFailed;
+
 	[SerializeField] private RecipeListSO recipeListSO;
 	private List<RecipeSO> waitingRecipeSOList;
 
@@ -28,8 +35,10 @@ public class DeliveryManager : MonoBehaviour
 			spawnRecipeTimer = spawnRecipeTimerMax;
 
 			if (waitingRecipeSOList.Count < waitingRecipesMax) {
-				RecipeSO waitingRecipeSO = recipeListSO.recipeSOList[Random.Range(0, recipeListSO.recipeSOList.Count)];
+				RecipeSO waitingRecipeSO = recipeListSO.recipeSOList[UnityEngine.Random.Range(0, recipeListSO.recipeSOList.Count)];
 				waitingRecipeSOList.Add(waitingRecipeSO);
+
+				OnRecipeSpawned?.Invoke(this, EventArgs.Empty);
 			}
 		}
 	}
@@ -58,8 +67,10 @@ public class DeliveryManager : MonoBehaviour
 				}
 
 				if(plateContentsMatchRecipe) {
+					// Delivered successful recipe
 					successfulRecipesAmount++;
 					waitingRecipeSOList.RemoveAt(i);
+					OnRecipeCompleted?.Invoke(this, EventArgs.Empty);
 					return;
 				}
 			}
