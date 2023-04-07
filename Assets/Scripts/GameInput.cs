@@ -11,6 +11,7 @@ public class GameInput : MonoBehaviour
 	public event EventHandler OnInteractAction;
 	public event EventHandler OnInteractAlternateAction;
 	public event EventHandler OnPauseAction;
+	public event EventHandler OnBindingRebind;
 	private PlayerInputActions playerInputActions;
 
 	public static GameInput Instance { get; private set; }
@@ -35,6 +36,9 @@ public class GameInput : MonoBehaviour
 		Instance = this;
 
 		playerInputActions = new PlayerInputActions();
+		if (PlayerPrefs.HasKey(PLAYER_PREFS_BINDINGS)) {
+			playerInputActions.LoadBindingOverridesFromJson(PlayerPrefs.GetString(PLAYER_PREFS_BINDINGS));
+		}
 		playerInputActions.Player.Enable();
 		playerInputActions.Player.Interact.performed += Interact_performed;
 		playerInputActions.Player.InteractAlt.performed += InteractAlt_performed;
@@ -141,7 +145,7 @@ public class GameInput : MonoBehaviour
 				PlayerPrefs.SetString(PLAYER_PREFS_BINDINGS, playerInputActions.SaveBindingOverridesAsJson());
 				PlayerPrefs.Save();
 
-	//			OnBindingRebind?.Invoke(this, EventArgs.Empty);
+				OnBindingRebind?.Invoke(this, EventArgs.Empty);
 			})
 			.Start();
 	}

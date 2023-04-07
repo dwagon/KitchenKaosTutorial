@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -30,7 +31,7 @@ public class OptionsUI : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI pauseText;
 	[SerializeField] private Transform pressToRebingKeyTransform;
 
-
+	private Action onCloseButtonAction;
 
 	private void Awake()
 	{
@@ -45,6 +46,7 @@ public class OptionsUI : MonoBehaviour
 		});
 		closeButton.onClick.AddListener(() => {
 			Hide();
+			onCloseButtonAction();
 		});
 		moveUpButton.onClick.AddListener(() => { RebindBinding(GameInput.Binding.Move_Up); });
 		moveDownButton.onClick.AddListener(() => { RebindBinding(GameInput.Binding.Move_Down); });
@@ -101,9 +103,11 @@ public class OptionsUI : MonoBehaviour
 		pressToRebingKeyTransform.gameObject.SetActive(false);
 	}
 
-	public void Show()
+	public void Show(Action onCloseButtonAction)
 	{
+		this.onCloseButtonAction = onCloseButtonAction;
 		gameObject.SetActive(true);
+		soundEffectsButton.Select();
 	}
 
 	private void Hide()
